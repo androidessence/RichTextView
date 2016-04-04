@@ -246,4 +246,16 @@ public class TestRichTextView extends AndroidTestCase {
         mRichTextView.clearSpans();
         assertEquals(0, mRichTextView.getSpanCount());
     }
+
+    /**
+     * Tries adding an invalid format type (null) and verifying an exception is thrown.
+     */
+    public void testInvalidColorFormatType() {
+        try {
+            mRichTextView.colorSpan(0, 5, null, Color.BLUE);
+            fail();
+        } catch(IllegalArgumentException iae) {
+            //Do nothing, we passed!
+        }
+    }
 }
