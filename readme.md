@@ -28,9 +28,9 @@ You can apply any combination of the following formats on a span of text:
 To use these, use one of the following formatSpan methods:
 
 - `formatSpan(int start, int end, FormatType formatType)`
--- This method is used to apply a certain format to a span of text in the RichTextView. Start (inclusive) and end (exclusive) are the indexes of the start and end characters to format.
+	- This method is used to apply a certain format to a span of text in the RichTextView. Start (inclusive) and end (exclusive) are the indexes of the start and end characters to format.
 - `formatSpan(int start, int end, EnumSet<FormatType> formatTypes)`
--- This method has the same function as the one above, but allows you to apply a number of FormatTypes to this span of text.
+	- This method has the same function as the one above, but allows you to apply a number of FormatTypes to this span of text.
 
 Color Format Types
 ------------------
@@ -42,7 +42,7 @@ You can apply the following color formats on a span of text:
 
 To use these formats, use the following method:
 - `colorSpan(int start, int end, FormatType formatType, int color)`
--- This method functions just as the ones above it, the only difference is that it also requires a color to apply to the span. For example, if you wanted to make the first four characters of text blue, you would use `colorSpan(0, 5, FormatType.FOREGROUND, Color.BLUE);`
+	- This method functions just as the ones above it, the only difference is that it also requires a color to apply to the span. For example, if you wanted to make the first four characters of text blue, you would use `colorSpan(0, 5, FormatType.FOREGROUND, Color.BLUE);`
 
 Credits & Contact
 -----------------
