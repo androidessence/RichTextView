@@ -238,6 +238,9 @@ public class RichTextView extends TextView{
             }
         };
 
+        /**
+         * @return The type of Span to apply for this FormatType.
+         */
         public abstract Object getSpan();
     }
 
@@ -259,6 +262,10 @@ public class RichTextView extends TextView{
             }
         };
 
+        /**
+         * @param color The color to apply to this span.
+         * @return The type of Span to apply for this ColorformatType.
+         */
         public abstract Object getSpan(int color);
     }
 }
