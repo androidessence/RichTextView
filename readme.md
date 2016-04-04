@@ -54,11 +54,13 @@ Below is a sample of all the possible formats you can apply to a RichTextView. I
 Credits & Contact
 -----------------
 
-This library was created by [Adam McNeilly](http://adammcneilly.com) with special help from [Maurício Pessoa](https://github.com/Mauker1) and [Trevor Elkins](http://trevore.com)!
+This library was created by [Adam McNeilly](http://adammcneilly.com) with special help from:
+ - [Maurício Pessoa](https://github.com/Mauker1)
+ - [Trevor Elkins](http://trevore.com)!
 
 It is also released under [Android Essence blog](http://androidessence.com/).
 
 License
 -------
 
-The RichTextView library is available under the [MIT License](https://opensource.org/licenses/MIT). You are free to modify and enhance it in any way.
+The RichTextView library is available under the [MIT License](https://opensource.org/licenses/MIT). You are free to modify and enhance it in any way. If you submit a pull request, please add your name into the credits section! :)
