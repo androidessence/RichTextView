@@ -114,6 +114,9 @@ public class RichTextView extends TextView{
         } else if(end < start || end >= mSpannableString.length()) {
             throw new IllegalArgumentException("Invalid end index.");
         }
+        if (formatTypes == null) {
+            throw new IllegalArgumentException("formatTypes can't be null!");
+        }
 
         // Create span to be applied - Default to normal.
         for(FormatType type : formatTypes) {
@@ -163,6 +166,9 @@ public class RichTextView extends TextView{
             throw new IllegalArgumentException("Invalid start index.");
         } else if(end < start || end >= mSpannableString.length()) {
             throw new IllegalArgumentException("Invalid end index.");
+        }
+        if (formatType == null) {
+            throw new IllegalArgumentException("formatType can't be null!");
         }
 
         // Add span
