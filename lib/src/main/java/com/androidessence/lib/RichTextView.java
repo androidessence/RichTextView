@@ -3,7 +3,6 @@ package com.androidessence.lib;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
-import android.text.Html;
 import android.text.SpannableString;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
@@ -13,13 +12,9 @@ import android.text.style.SubscriptSpan;
 import android.text.style.SuperscriptSpan;
 import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.TextView;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.EnumSet;
-import java.util.List;
 
 /**
  * Rich TextView Component that is an enhanced version of a TextView with certain styling.
@@ -117,35 +112,11 @@ public class RichTextView extends TextView{
         // There is no need to consider a null FormatType. Since we have two method headers of (int, int, type)
         // The compiler will claim that `formatSpan(int, int, null);` call is ambiguous.
 
+        mSpanCount += formatTypes.size();
+
         // Create span to be applied - Default to normal.
         for(FormatType type : formatTypes) {
-            // Update span count
-            mSpanCount++;
-
-            switch(type) {
-                case BOLD:
-                    mSpannableString.setSpan(new StyleSpan(Typeface.BOLD), start, end, 0);
-                    break;
-                case ITALIC:
-                    mSpannableString.setSpan(new StyleSpan(Typeface.ITALIC), start, end, 0);
-                    break;
-                case UNDERLINE:
-                    mSpannableString.setSpan(new UnderlineSpan(), start, end, 0);
-                    break;
-                case STRIKETHROUGH:
-                    mSpannableString.setSpan(new StrikethroughSpan(), start, end, 0);
-                    break;
-                case SUPERSCRIPT:
-                    mSpannableString.setSpan(new SuperscriptSpan(), start, end, 0);
-                    break;
-                case SUBSCRIPT:
-                    mSpannableString.setSpan(new SubscriptSpan(), start, end, 0);
-                    break;
-                case NONE:
-                default:
-                    mSpannableString.setSpan(new StyleSpan(Typeface.NORMAL), start, end, 0);
-                    break;
-            }
+            mSpannableString.setSpan(type.getSpan(), start, end, 0);
         }
 
         setText(mSpannableString);
@@ -171,17 +142,7 @@ public class RichTextView extends TextView{
 
         // Add span
         mSpanCount++;
-
-        switch(formatType) {
-            case FOREGROUND:
-                mSpannableString.setSpan(new ForegroundColorSpan(color), start, end, 0);
-                break;
-            case HIGHLIGHT:
-                mSpannableString.setSpan(new BackgroundColorSpan(color), start, end, 0);
-                break;
-            default:
-                break;
-        }
+        mSpannableString.setSpan(formatType.getSpan(color), start, end, 0);
 
         // Set text
         setText(mSpannableString);
@@ -228,20 +189,76 @@ public class RichTextView extends TextView{
      * An enumeration of various ways to format the text.
      */
     public enum FormatType {
-        NONE,
-        BOLD,
-        ITALIC,
-        UNDERLINE,
-        STRIKETHROUGH,
-        SUPERSCRIPT,
-        SUBSCRIPT
+        NONE {
+            @Override
+            public Object getSpan() {
+                return new StyleSpan(Typeface.NORMAL);
+            }
+        },
+
+        BOLD {
+            @Override
+            public Object getSpan() {
+                return new StyleSpan(Typeface.BOLD);
+            }
+        },
+
+        ITALIC {
+            @Override
+            public Object getSpan() {
+                return new StyleSpan(Typeface.ITALIC);
+            }
+        },
+
+        UNDERLINE {
+            @Override
+            public Object getSpan() {
+                return new UnderlineSpan();
+            }
+        },
+
+        STRIKETHROUGH {
+            @Override
+            public Object getSpan() {
+                return new StrikethroughSpan();
+            }
+        },
+
+        SUPERSCRIPT {
+            @Override
+            public Object getSpan() {
+                return new SuperscriptSpan();
+            }
+        },
+
+        SUBSCRIPT {
+            @Override
+            public Object getSpan() {
+                return new SubscriptSpan();
+            }
+        };
+
+        public abstract Object getSpan();
     }
 
     /**
      * An enumeration of various ways to color the text.
      */
     public enum ColorFormatType {
-        FOREGROUND,
-        HIGHLIGHT
+        FOREGROUND {
+            @Override
+            public Object getSpan(int color) {
+                return new ForegroundColorSpan(color);
+            }
+        },
+
+        HIGHLIGHT {
+            @Override
+            public Object getSpan(int color) {
+                return new BackgroundColorSpan(color);
+            }
+        };
+
+        public abstract Object getSpan(int color);
     }
 }
