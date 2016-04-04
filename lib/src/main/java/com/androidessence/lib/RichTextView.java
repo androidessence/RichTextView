@@ -111,7 +111,7 @@ public class RichTextView extends TextView{
         // If the end string is less than start, or greater than/equal to the length of the string, it is invalid.
         if(start < 0 || start >= mSpannableString.length()) {
             throw new IllegalArgumentException("Invalid start index.");
-        } else if(end < start || end >= mSpannableString.length()) {
+        } else if(end < start || end > mSpannableString.length()) {
             throw new IllegalArgumentException("Invalid end index.");
         }
         // There is no need to consider a null FormatType. Since we have two method headers of (int, int, type)
@@ -160,10 +160,9 @@ public class RichTextView extends TextView{
      */
     public void colorSpan(int start, int end, ColorFormatType formatType, int color) {
         // If the start index is less than 0 or greater than/equal to the length of the string, it is invalid.
-        // If the length from the start index surpasses the length of the string, or else if the length is negative, it is valid.
         if(start < 0 || start >= mSpannableString.length()) {
             throw new IllegalArgumentException("Invalid start index.");
-        } else if(end < start || end >= mSpannableString.length()) {
+        } else if(end < start || end > mSpannableString.length()) {
             throw new IllegalArgumentException("Invalid end index.");
         } else if (formatType == null) {
             throw new IllegalArgumentException("Invalid FormatType.");

@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
                     "This text is superscript.\n" + // Superscript = 106 - 118
                     "This text is subscript.\n" + // Subscript = 132 - 142
                     "This text is blue.\n" + // Blue = 156 - 161
-                    "This highlight is red.\n"; // Red = 180 - 184
+                    "This highlight is red."; // Red = 180 - 184
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         richTextView.formatSpan(106, 118, RichTextView.FormatType.SUPERSCRIPT);
         richTextView.formatSpan(132, 142, RichTextView.FormatType.SUBSCRIPT);
         richTextView.colorSpan(156, 161, RichTextView.ColorFormatType.FOREGROUND, Color.BLUE);
-        richTextView.colorSpan(180, 184, RichTextView.ColorFormatType.HIGHLIGHT, Color.RED);
+        // Test formatting to end of string.
+        richTextView.colorSpan(180, SAMPLE_STRING.length(), RichTextView.ColorFormatType.HIGHLIGHT, Color.RED);
     }
 }
