@@ -108,7 +108,7 @@ public class RichTextView extends TextView{
      */
     public void formatSpan(int start, int end, EnumSet<FormatType> formatTypes) {
         // If the start index is less than 0 or greater than/equal to the length of the string, it is invalid.
-        // If the end string is less than start, or greater than/equal to the length of the string, it is invalid.
+        // If the end index is less than start or greater than the string length, it is invalid.
         if(start < 0 || start >= mSpannableString.length()) {
             throw new IllegalArgumentException("Invalid start index.");
         } else if(end < start || end > mSpannableString.length()) {
@@ -160,6 +160,7 @@ public class RichTextView extends TextView{
      */
     public void colorSpan(int start, int end, ColorFormatType formatType, int color) {
         // If the start index is less than 0 or greater than/equal to the length of the string, it is invalid.
+        // If the end index is less than start or greater than the string length, it is invalid.
         if(start < 0 || start >= mSpannableString.length()) {
             throw new IllegalArgumentException("Invalid start index.");
         } else if(end < start || end > mSpannableString.length()) {
