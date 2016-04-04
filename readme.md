@@ -56,7 +56,7 @@ Credits & Contact
 
 This library was created by [Adam McNeilly](http://adammcneilly.com) with special help from:
  - [Maurício Pessoa](https://github.com/Mauker1)
- - [Trevor Elkins](http://trevore.com)!
+ - [Trevor Elkins](http://trevore.com)
 
 It is also released under [Android Essence blog](http://androidessence.com/).
 
