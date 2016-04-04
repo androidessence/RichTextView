@@ -44,6 +44,13 @@ To use these formats, use the following method:
 - `colorSpan(int start, int end, FormatType formatType, int color)`
 	- This method functions just as the ones above it, the only difference is that it also requires a color to apply to the span. For example, if you wanted to make the first four characters of text blue, you would use `colorSpan(0, 5, FormatType.FOREGROUND, Color.BLUE);`
 
+Sample
+-----
+
+Below is a sample of all the possible formats you can apply to a RichTextView. In this example it is all one string, formatted eight different ways.
+
+<img src='https://dl2.pushbulletusercontent.com/PUhTFME72oZBdASlIQwM9R8vPxeXnrgS/Screenshot_20160403-164257.png' width='400' height='640' />
+
 Credits & Contact
 -----------------
 
