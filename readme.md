@@ -10,17 +10,7 @@ Usage
 To have access to the library, add the following dependency to your build.gradle:
 
 ```java
-	compile 'com.androidessence.lib:richtextview:1.0.0'
-```
-
-At the time of publication, the library has not yet been linked to JCenter, so you will also have to add the link to our Maven repository as well:
-
-```java
-	repositories {
-    	maven {
-        	url  "http://dl.bintray.com/androidessence/maven"
-    	}
-	}
+	compile 'com.androidessence.lib:richtextview:1.0.1'
 ```
 
 Format Types
@@ -64,7 +54,7 @@ Below is a sample of all the possible formats you can apply to a RichTextView. I
 Credits & Contact
 -----------------
 
-This library was created by [Adam McNeilly](http://adammcneilly.com) with special help from [Maurício Pessoa](https://github.com/Mauker1)!
+This library was created by [Adam McNeilly](http://adammcneilly.com) with special help from [Maurício Pessoa](https://github.com/Mauker1) and [Trevor Elkins](http://trevore.com)!
 
 It is also released under [Android Essence blog](http://androidessence.com/).
 
