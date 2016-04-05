@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.test.AndroidTestCase;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
 import android.text.style.SubscriptSpan;
@@ -224,6 +225,27 @@ public class TestRichTextView extends AndroidTestCase {
         Object firstSpan = spans[0];
         assertTrue(firstSpan instanceof BackgroundColorSpan);
         assertTrue(((BackgroundColorSpan)firstSpan).getBackgroundColor() == Color.BLUE);
+    }
+
+    /**
+     * Adds a size span to the RichTextView and verifies it was successfully added.
+     */
+    public void testAddSizeSpan() {
+        // Format first word
+        mRichTextView.sizeSpan(0, 5, 2f);
+
+        // Get spans
+        Object[] spans = mRichTextView.getSpans();
+
+        // Assert we only have one
+        assertEquals(1, spans.length);
+
+        // Get first one
+        // Assert it is size.
+        // Assert it is 2f.
+        Object firstSpan = spans[0];
+        assertTrue(firstSpan instanceof RelativeSizeSpan);
+        assertTrue(((RelativeSizeSpan)firstSpan).getSizeChange() == 2f);
     }
 
     /**

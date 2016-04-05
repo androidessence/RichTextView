@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.text.SpannableString;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
 import android.text.style.SubscriptSpan;
@@ -27,7 +28,7 @@ public class RichTextView extends TextView{
     /**
      * The Context that this view is displayed in.
      */
-    private Context mContext;
+    private final Context mContext;
 
     /**
      * The spannable string to display in this TextView.
@@ -125,7 +126,7 @@ public class RichTextView extends TextView{
     /**
      * Colors a portion of the string.
      * @param start The index of the first character to color.
-     * @param end The index of the last character to color..
+     * @param end The index of the last character to color.
      * @param formatType The type of format to apply to this span.
      * @param color The color to apply to this substring.
      */
@@ -143,6 +144,29 @@ public class RichTextView extends TextView{
         // Add span
         mSpanCount++;
         mSpannableString.setSpan(formatType.getSpan(color), start, end, 0);
+
+        // Set text
+        setText(mSpannableString);
+    }
+
+    /**
+     * Changes the size of a given span.
+     * @param start The index of the first character to color.
+     * @param end The index of the last character to color.
+     * @param proportion The proportion to increase/decrease the font size.
+     */
+    public void sizeSpan(int start, int end, float proportion) {
+        // If the start index is less than 0 or greater than/equal to the length of the string, it is invalid.
+        // If the end index is less than start or greater than the string length, it is invalid.
+        if(start < 0 || start >= mSpannableString.length()) {
+            throw new IllegalArgumentException("Invalid start index.");
+        } else if(end < start || end > mSpannableString.length()) {
+            throw new IllegalArgumentException("Invalid end index.");
+        }
+
+        // Add span
+        mSpanCount++;
+        mSpannableString.setSpan(new RelativeSizeSpan(proportion), start, end, 0);
 
         // Set text
         setText(mSpannableString);
