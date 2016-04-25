@@ -1,3 +1,5 @@
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-RichTextView-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/3483)
+
 RichTextView Library
 =============
 
