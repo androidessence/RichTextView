@@ -3,7 +3,9 @@ package com.androidessence.lib;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
+import android.text.Layout;
 import android.text.SpannableString;
+import android.text.style.AlignmentSpan;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StrikethroughSpan;
@@ -235,6 +237,27 @@ public class RichTextView extends TextView{
             @Override
             public Object getSpan() {
                 return new SubscriptSpan();
+            }
+        },
+
+        CENTER_ALIGN {
+            @Override
+            public Object getSpan() {
+                return new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER);
+            }
+        },
+
+        LEFT_ALIGN {
+            @Override
+            public Object getSpan() {
+                return new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL);
+            }
+        },
+
+        RIGHT_ALIGN {
+            @Override
+            public Object getSpan() {
+                return new AlignmentSpan.Standard(Layout.Alignment.ALIGN_OPPOSITE);
             }
         };
 
