@@ -24,13 +24,17 @@ public class MainActivity extends AppCompatActivity {
                     "This text is blue.\n" + // Blue = 156 - 161
                     "This highlight is red."; // Red = 180 - 184
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         RichTextView richTextView = (RichTextView) findViewById(R.id.text_view);
-        richTextView.setText(SAMPLE_STRING);
+        richTextView.setSpannableString(new SpannableString(SAMPLE_STRING));
+        richTextView.formatNumberSpan();
+        /*richTextView.setText(SAMPLE_STRING);*/
         richTextView.formatSpan(13, 18, RichTextView.FormatType.BOLD);
         richTextView.formatSpan(32, 39, RichTextView.FormatType.ITALIC);
         richTextView.formatSpan(53, 64, RichTextView.FormatType.UNDERLINE);
@@ -40,5 +44,6 @@ public class MainActivity extends AppCompatActivity {
         richTextView.colorSpan(156, 161, RichTextView.ColorFormatType.FOREGROUND, Color.BLUE);
         // Test formatting to end of string.
         richTextView.colorSpan(180, SAMPLE_STRING.length(), RichTextView.ColorFormatType.HIGHLIGHT, Color.RED);
+
     }
 }
