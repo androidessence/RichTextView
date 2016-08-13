@@ -47,18 +47,12 @@ public class NumberSpan implements LeadingMarginSpan {
     private float mTextSize = 10f;
     private float mWidth;
 
-    public NumberSpan(int nr, int gapWidth, boolean isEmpty, boolean isFirst, boolean isLast) {
-        mNr = nr;
-        mGapWidth = gapWidth;
-        mIgnoreSpan = isEmpty && isLast && !isFirst;
-    }
 
-
-
-    public NumberSpan(int nr, int gapWidth, boolean ignoreSpan) {
+    public NumberSpan(int nr, int gapWidth, boolean ignoreSpan,float textSize) {
         mNr = nr;
         mGapWidth = gapWidth;
         mIgnoreSpan = ignoreSpan;
+        mTextSize = textSize;
     }
 
     @Override
@@ -76,7 +70,7 @@ public class NumberSpan implements LeadingMarginSpan {
             Paint.Style oldStyle = p.getStyle();
             float oldTextSize = p.getTextSize();
             p.setStyle(Paint.Style.FILL);
-            mTextSize = baseline - top;
+           // mTextSize = baseline - top;
             p.setTextSize(mTextSize);
             mWidth = p.measureText(mNr + ".");
 

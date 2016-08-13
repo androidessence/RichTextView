@@ -102,7 +102,7 @@ public class RichTextView extends TextView {
             Log.d("Index : " + i, splitter[i]);
             if (!splitter[i].equals("") && !splitter[i].equals("\n")) {
                 SpannableString s1 = new SpannableString(splitter[i] + "\n");
-                s1.setSpan(new NumberSpan(index++, 100, false), 0, splitter[i].length(), 0);
+                s1.setSpan(new NumberSpan(index++, 100, false,getTextSize()), 0, splitter[i].length(), 0);
                 result = TextUtils.concat(result, s1);
             }
         }
