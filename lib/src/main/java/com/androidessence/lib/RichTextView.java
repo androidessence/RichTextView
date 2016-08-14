@@ -2,13 +2,16 @@ package com.androidessence.lib;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.BackgroundColorSpan;
+import android.text.style.BulletSpan;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.ImageSpan;
 import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
 import android.text.style.SubscriptSpan;
@@ -109,6 +112,24 @@ public class RichTextView extends TextView {
 
         setText(result);
 
+    }
+
+    public void formatImageSpan(int start, int end, Bitmap drawable)
+    {
+        // If the start index is less than 0 or greater than/equal to the length of the string, it is invalid.
+        // If the end index is less than start or greater than the string length, it is invalid.
+        if (start < 0 || start >= mSpannableString.length()) {
+            throw new IllegalArgumentException("Invalid start index.");
+        } else if (end < start || end > mSpannableString.length()) {
+            throw new IllegalArgumentException("Invalid end index.");
+        }
+        
+        // Add span
+        mSpanCount++;
+        mSpannableString.setSpan(new ImageSpan(getContext(), drawable), start, end, 0);
+
+        // Set text
+        setText(mSpannableString);
     }
 
     //-- Format methods --//

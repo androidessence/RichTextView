@@ -1,5 +1,6 @@
 package com.androidessence.richtextview;
 
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
                     "This text is superscript.\n" + // Superscript = 106 - 118
                     "This text is subscript.\n" + // Subscript = 132 - 142
                     "This text is blue.\n" + // Blue = 156 - 161
-                    "This highlight is red."; // Red = 180 - 184
+                    "This highlight is red.\n" + // Red = 180 - 184
+                    "This line has a Image."; // 207
 
 
 
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         RichTextView richTextView = (RichTextView) findViewById(R.id.text_view);
         richTextView.setSpannableString(new SpannableString(SAMPLE_STRING));
         richTextView.formatNumberSpan();
+
         /*richTextView.setText(SAMPLE_STRING);*/
         richTextView.formatSpan(13, 18, RichTextView.FormatType.BOLD);
         richTextView.formatSpan(32, 39, RichTextView.FormatType.ITALIC);
@@ -43,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
         richTextView.formatSpan(132, 142, RichTextView.FormatType.SUBSCRIPT);
         richTextView.colorSpan(156, 161, RichTextView.ColorFormatType.FOREGROUND, Color.BLUE);
         // Test formatting to end of string.
-        richTextView.colorSpan(180, SAMPLE_STRING.length(), RichTextView.ColorFormatType.HIGHLIGHT, Color.RED);
+        richTextView.colorSpan(180, 184, RichTextView.ColorFormatType.HIGHLIGHT, Color.RED);
+        richTextView.formatImageSpan(206,207, BitmapFactory.decodeResource(getResources(),
+                R.mipmap.ic_launcher));
 
     }
 }

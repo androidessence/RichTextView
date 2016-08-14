@@ -44,7 +44,7 @@ public class NumberSpan implements LeadingMarginSpan {
     private final int mGapWidth;
     private final boolean mIgnoreSpan;
 
-    private float mTextSize = 10f;
+    private float mTextSize = 20f;
     private float mWidth;
 
 
