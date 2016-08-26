@@ -92,10 +92,10 @@ public class RichTextView extends TextView {
         mSpannableString = new SpannableString(text);
         super.setText(mSpannableString, type);
     }
-    
+
     public void formatNumberSpan(int startline,int endline) {
 
-        mSpanCount++;
+
         String[] splitter = mSpannableString.toString().split("\n");
 
         int start = 0;
@@ -107,6 +107,7 @@ public class RichTextView extends TextView {
 
                 /* index starts at 0.*/
                 if(i>=(startline-1) && i<endline) {
+                    mSpanCount++;
                     mSpannableString.setSpan(new NumberSpan(index++, 100, false, getTextSize()), start, (start + 1), 0);
                     start = start + splitter[i].length() + 1;
                 }else
@@ -218,7 +219,7 @@ public class RichTextView extends TextView {
      */
     public void clearSpans() {
         // Get spans
-        Object[] spans = mSpannableString.getSpans(0, mSpanCount, Object.class);
+        Object[] spans = mSpannableString.getSpans(0, mSpannableString.length(), Object.class);
 
         // Loop through and remove each one.
         for (Object span : spans) {
@@ -229,6 +230,8 @@ public class RichTextView extends TextView {
         // Set text again.
         setText(mSpannableString);
     }
+
+
 
     //-- Accessors --//
 
