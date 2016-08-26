@@ -4,10 +4,12 @@ package com.androidessence.lib;
  * Created by Raghunandan on 13-08-2016.
  */
 
+import android.annotation.SuppressLint;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.text.Layout;
 import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.LeadingMarginSpan;
 
 
@@ -38,6 +40,7 @@ import android.text.style.LeadingMarginSpan;
  * (]0, 4][4, 4] --> the leading margin of the second span is added to the ]0, 4] paragraph regardless of the Spanned.flags)
  * --> therefore we ignore the leading margin for the last, empty paragraph unless it's the only one
  */
+@SuppressLint("ParcelCreator")
 public class NumberSpan implements LeadingMarginSpan {
 
     private final int mNr;

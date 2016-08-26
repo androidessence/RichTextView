@@ -24,12 +24,13 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import java.util.EnumSet;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
  * Rich TextView Component that is an enhanced version of a TextView with certain styling.
- *
+ * <p>
  * Created by adammcneilly on 4/1/16.
  */
 public class RichTextView extends TextView {
@@ -50,7 +51,6 @@ public class RichTextView extends TextView {
      */
     private int mSpanCount;
 
-    private CharSequence charSequence;
 
     //-- Constructors --//
 
@@ -89,33 +89,39 @@ public class RichTextView extends TextView {
     @Override
     public void setText(CharSequence text, BufferType type) {
         // Set our spannable string.
-        charSequence = text;
         mSpannableString = new SpannableString(text);
         super.setText(mSpannableString, type);
     }
-
-    public void formatNumberSpan() {
+    
+    public void formatNumberSpan(int startline,int endline) {
 
         mSpanCount++;
-        String[] splitter = spannableString.toString().split("\n");
+        String[] splitter = mSpannableString.toString().split("\n");
 
-        CharSequence result = "";
+        int start = 0;
         int index = 1;
+
         for (int i = 0; i < splitter.length; i++) {
             Log.d("Index : " + i, splitter[i]);
             if (!splitter[i].equals("") && !splitter[i].equals("\n")) {
-                SpannableString s1 = new SpannableString(splitter[i] + "\n");
-                s1.setSpan(new NumberSpan(index++, 100, false,getTextSize()), 0, splitter[i].length(), 0);
-                result = TextUtils.concat(result, s1);
+
+                /* index starts at 0.*/
+                if(i>=(startline-1) && i<endline) {
+                    mSpannableString.setSpan(new NumberSpan(index++, 100, false, getTextSize()), start, (start + 1), 0);
+                    start = start + splitter[i].length() + 1;
+                }else
+                {
+                    start = start + splitter[i].length() + 1;
+                }
+
             }
         }
 
-        setText(result);
+        setText(mSpannableString);
 
     }
 
-    public void formatImageSpan(int start, int end, Bitmap drawable)
-    {
+    public void formatImageSpan(int start, int end, Bitmap drawable) {
         // If the start index is less than 0 or greater than/equal to the length of the string, it is invalid.
         // If the end index is less than start or greater than the string length, it is invalid.
         if (start < 0 || start >= mSpannableString.length()) {
@@ -123,7 +129,7 @@ public class RichTextView extends TextView {
         } else if (end < start || end > mSpannableString.length()) {
             throw new IllegalArgumentException("Invalid end index.");
         }
-        
+
         // Add span
         mSpanCount++;
         mSpannableString.setSpan(new ImageSpan(getContext(), drawable), start, end, 0);
@@ -245,10 +251,6 @@ public class RichTextView extends TextView {
     }
 
 
-    private SpannableString spannableString;
-    public void setSpannableString(SpannableString spannableString) {
-        this.spannableString = spannableString;
-    }
 
     //-- Inner classes --//
 
