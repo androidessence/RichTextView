@@ -50,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
         richTextView.formatImageSpan(206,207, BitmapFactory.decodeResource(getResources(),
                 R.mipmap.ic_launcher));
 
+        //richTextView.clearSpans();
+
+
 
     }
 }
