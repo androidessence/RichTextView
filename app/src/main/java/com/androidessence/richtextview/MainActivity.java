@@ -1,17 +1,10 @@
 package com.androidessence.richtextview;
 
 import android.graphics.Color;
-import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.SpannableString;
-import android.text.style.StyleSpan;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 
 import com.androidessence.lib.RichTextView;
-
-import java.util.EnumSet;
 
 public class MainActivity extends AppCompatActivity {
     private static final String SAMPLE_STRING =
