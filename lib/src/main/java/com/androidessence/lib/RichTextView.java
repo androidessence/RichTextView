@@ -1,5 +1,8 @@
 package com.androidessence.lib;
 
+import android.animation.IntEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -20,6 +23,7 @@ import android.text.style.SuperscriptSpan;
 import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.Property;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -94,6 +98,25 @@ public class RichTextView extends AppCompatTextView {
         super.setText(mSpannableString, type);
     }
 
+    public void formatFadeInSpan(int start, int end)
+    {
+
+        final FadeInSpan span = new FadeInSpan();
+
+        mSpannableString.setSpan(span, start, end, 0);
+
+        ObjectAnimator objectAnimator = ObjectAnimator.ofInt(
+                span, FADE_INT_PROPERTY, 0, 255);
+        objectAnimator.setEvaluator(new IntEvaluator());
+        objectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                setText(mSpannableString);
+            }
+        });
+        objectAnimator.setDuration(10000);
+        objectAnimator.start();
+    }
     public void formatBulletSpan(int startline,int endline) {
 
         mSpanCount++;
@@ -125,7 +148,6 @@ public class RichTextView extends AppCompatTextView {
         mSpanCount++;
         String[] splitter = mSpannableString.toString().split("\n");
 
-        CharSequence result = "";
         int start = 0;
         int index = 1;
 
@@ -365,4 +387,17 @@ public class RichTextView extends AppCompatTextView {
         public abstract Object getSpan(int color);
     }
 
+    /* Fade In */
+    private static final Property<FadeInSpan, Integer> FADE_INT_PROPERTY
+            = new Property<FadeInSpan, Integer>(Integer.class, "FADE_INT_PROPERTY") {
+
+        @Override
+        public void set(FadeInSpan span, Integer value) {
+            span.setAlpha(value);
+        }
+        @Override
+        public Integer get(FadeInSpan object) {
+            return object.getAlpha();
+        }
+    };
 }
