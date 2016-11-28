@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.support.v7.widget.AppCompatTextView;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -33,7 +34,7 @@ import java.util.regex.Pattern;
  * <p>
  * Created by adammcneilly on 4/1/16.
  */
-public class RichTextView extends TextView {
+public class RichTextView extends AppCompatTextView {
     //-- Properties --//
 
     /**
@@ -93,11 +94,38 @@ public class RichTextView extends TextView {
         super.setText(mSpannableString, type);
     }
 
-    public void formatNumberSpan(int startline,int endline) {
+    public void formatBulletSpan(int startline,int endline) {
 
-
+        mSpanCount++;
         String[] splitter = mSpannableString.toString().split("\n");
 
+        int start = 0;
+
+        for (int i = 0; i < splitter.length; i++) {
+            Log.d("Index : " + i, splitter[i]);
+            if (!splitter[i].equals("") && !splitter[i].equals("\n")) {
+
+                if(i>=(startline-1) && i<endline) {
+
+                    mSpannableString.setSpan(new com.androidessence.lib.BulletSpan(100,false),start,(start+1),0);
+                    start = start + splitter[i].length() + 1;
+                }else
+                {
+                    start = start + splitter[i].length() + 1;
+                }
+
+            }
+        }
+
+        setText(mSpannableString);
+
+    }
+    public void formatNumberSpan(int startline,int endline) {
+
+        mSpanCount++;
+        String[] splitter = mSpannableString.toString().split("\n");
+
+        CharSequence result = "";
         int start = 0;
         int index = 1;
 
@@ -105,9 +133,7 @@ public class RichTextView extends TextView {
             Log.d("Index : " + i, splitter[i]);
             if (!splitter[i].equals("") && !splitter[i].equals("\n")) {
 
-                /* index starts at 0.*/
                 if(i>=(startline-1) && i<endline) {
-                    mSpanCount++;
                     mSpannableString.setSpan(new NumberSpan(index++, 100, false, getTextSize()), start, (start + 1), 0);
                     start = start + splitter[i].length() + 1;
                 }else
@@ -219,7 +245,7 @@ public class RichTextView extends TextView {
      */
     public void clearSpans() {
         // Get spans
-        Object[] spans = mSpannableString.getSpans(0, mSpannableString.length(), Object.class);
+        Object[] spans = mSpannableString.getSpans(0, mSpanCount, Object.class);
 
         // Loop through and remove each one.
         for (Object span : spans) {
@@ -230,8 +256,6 @@ public class RichTextView extends TextView {
         // Set text again.
         setText(mSpannableString);
     }
-
-
 
     //-- Accessors --//
 

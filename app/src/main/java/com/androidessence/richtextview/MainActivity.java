@@ -35,13 +35,16 @@ public class MainActivity extends AppCompatActivity {
 
         RichTextView richTextView = (RichTextView) findViewById(R.id.text_view);
 
+        //richTextView.setSpannableString(new SpannableString(SAMPLE_STRING));
+        //richTextView.formatNumberSpan();
+
         richTextView.setText(SAMPLE_STRING);
-		
         richTextView.formatSpan(13, 18, RichTextView.FormatType.BOLD);
         richTextView.formatSpan(32, 39, RichTextView.FormatType.ITALIC);
         richTextView.formatSpan(53, 64, RichTextView.FormatType.UNDERLINE);
         richTextView.formatSpan(78, 92, RichTextView.FormatType.STRIKETHROUGH);
         richTextView.formatNumberSpan(1, 5);
+        richTextView.formatBulletSpan(1, 5);
         richTextView.formatSpan(106, 118, RichTextView.FormatType.SUPERSCRIPT);
         richTextView.formatSpan(132, 142, RichTextView.FormatType.SUBSCRIPT);
         richTextView.colorSpan(156, 161, RichTextView.ColorFormatType.FOREGROUND, Color.BLUE);
@@ -49,9 +52,6 @@ public class MainActivity extends AppCompatActivity {
         richTextView.colorSpan(180, 184, RichTextView.ColorFormatType.HIGHLIGHT, Color.RED);
         richTextView.formatImageSpan(206,207, BitmapFactory.decodeResource(getResources(),
                 R.mipmap.ic_launcher));
-
-        //richTextView.clearSpans();
-
 
 
     }
