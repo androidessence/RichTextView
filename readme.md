@@ -12,7 +12,7 @@ Usage
 To have access to the library, add the following dependency to your build.gradle:
 
 ```java
-	compile 'com.androidessence.lib:richtextview:1.0.1'
+	compile 'com.androidessence.lib:richtextview:1.0.2'
 ```
 
 Format Types
@@ -33,6 +33,13 @@ To use these, use one of the following formatSpan methods:
 	- This method is used to apply a certain format to a span of text in the RichTextView. Start (inclusive) and end (exclusive) are the indexes of the start and end characters to format.
 - `formatSpan(int start, int end, EnumSet<FormatType> formatTypes)`
 	- This method has the same function as the one above, but allows you to apply a number of FormatTypes to this span of text.
+- `formatNumberSpan(int startline, int endline)`
+	- This method is used to apply NumberSpan based on the start and end line specified.
+- `formatBulletSpan(int startline, int endline)`
+	- This method is used to apply Bullets based on start and end lines.
+- `formatImageSpan(int start, int end, Bitmap bitmap)`
+	- This method is used to apply ImageSpan based on the start and end line specified along with a bitmap specified.
+
 
 Color Format Types
 ------------------
@@ -51,7 +58,7 @@ Sample
 
 Below is a sample of all the possible formats you can apply to a RichTextView. In this example it is all one string, formatted eight different ways.
 
-<img src='http://imgur.com/wX7rYjn' width='400' height='640' />
+<img src='sample.png' width='400' height='640' />
 
 Credits & Contact
 -----------------
@@ -59,6 +66,7 @@ Credits & Contact
 This library was created by [Adam McNeilly](http://adammcneilly.com) with special help from:
  - [Maurício Pessoa](https://github.com/Mauker1)
  - [Trevor Elkins](http://trevore.com)
+ - [Raghunandan Kavi](https://github.com/raghunandankavi2010)
 
 It is also released under [Android Essence blog](http://androidessence.com/).
 
