@@ -51,7 +51,7 @@ Sample
 
 Below is a sample of all the possible formats you can apply to a RichTextView. In this example it is all one string, formatted eight different ways.
 
-<img src='http://imgur.com/a/0lyjY' width='400' height='640' />
+<img src='http://imgur.com/wX7rYjn' width='400' height='640' />
 
 Credits & Contact
 -----------------
