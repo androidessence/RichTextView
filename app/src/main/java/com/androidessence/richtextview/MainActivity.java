@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         richTextView.colorSpan(180, 184, RichTextView.ColorFormatType.HIGHLIGHT, Color.RED);
         richTextView.formatImageSpan(206,207, BitmapFactory.decodeResource(getResources(),
                 R.mipmap.ic_launcher));
-        richTextView.formatFadeInSpan(208,richTextView.length());
+        richTextView.formatFadeInSpan(208,richTextView.length(),500);
 
 
     }

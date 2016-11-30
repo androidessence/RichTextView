@@ -8,12 +8,8 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.support.v7.widget.AppCompatTextView;
-import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.TextUtils;
 import android.text.style.BackgroundColorSpan;
-import android.text.style.BulletSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
 import android.text.style.StrikethroughSpan;
@@ -22,15 +18,9 @@ import android.text.style.SubscriptSpan;
 import android.text.style.SuperscriptSpan;
 import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.Property;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.EnumSet;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 /**
@@ -98,9 +88,18 @@ public class RichTextView extends AppCompatTextView {
         super.setText(mSpannableString, type);
     }
 
-    public void formatFadeInSpan(int start, int end)
+    /**
+     * Add a bullet at the start fo each line. You can specify start and endline
+     *
+     * @param start      The index at which the text starts to fade.
+     * @param end        The index at which the text fade ends.
+     * @param duration   The duration for the text fade.
+     *
+     */
+    public void formatFadeInSpan(int start, int end,int duration)
     {
 
+        mSpanCount++;
         final FadeInSpan span = new FadeInSpan();
 
         mSpannableString.setSpan(span, start, end, 0);
@@ -114,9 +113,16 @@ public class RichTextView extends AppCompatTextView {
                 setText(mSpannableString);
             }
         });
-        objectAnimator.setDuration(10000);
+        objectAnimator.setDuration(duration);
         objectAnimator.start();
     }
+
+    /**
+     * Add a bullet at the start fo each line. You can specify start and endline
+     *
+     * @param startline      The start line at which bullet is shown.
+     * @param endline        The end line at which bullet is shown.
+     */
     public void formatBulletSpan(int startline,int endline) {
 
         mSpanCount++;
@@ -125,7 +131,7 @@ public class RichTextView extends AppCompatTextView {
         int start = 0;
 
         for (int i = 0; i < splitter.length; i++) {
-            Log.d("Index : " + i, splitter[i]);
+            //Log.d("Index : " + i, splitter[i]);
             if (!splitter[i].equals("") && !splitter[i].equals("\n")) {
 
                 if(i>=(startline-1) && i<endline) {
@@ -143,6 +149,13 @@ public class RichTextView extends AppCompatTextView {
         setText(mSpannableString);
 
     }
+
+    /**
+     * Add a bullet at the start fo each line. You can specify start and endline
+     *
+     * @param startline      The start line at which number is shown.
+     * @param endline        The end line at which number is shown.
+     */
     public void formatNumberSpan(int startline,int endline) {
 
         mSpanCount++;
@@ -152,7 +165,7 @@ public class RichTextView extends AppCompatTextView {
         int index = 1;
 
         for (int i = 0; i < splitter.length; i++) {
-            Log.d("Index : " + i, splitter[i]);
+            //Log.d("Index : " + i, splitter[i]);
             if (!splitter[i].equals("") && !splitter[i].equals("\n")) {
 
                 if(i>=(startline-1) && i<endline) {
@@ -170,6 +183,12 @@ public class RichTextView extends AppCompatTextView {
 
     }
 
+    /**
+     * Add a Image at the specified index
+     *
+     * @param start    The start index where image is shown.
+     * @param end      The end index where image is shown.
+     */
     public void formatImageSpan(int start, int end, Bitmap drawable) {
         // If the start index is less than 0 or greater than/equal to the length of the string, it is invalid.
         // If the end index is less than start or greater than the string length, it is invalid.
@@ -400,4 +419,6 @@ public class RichTextView extends AppCompatTextView {
             return object.getAlpha();
         }
     };
+
+
 }
