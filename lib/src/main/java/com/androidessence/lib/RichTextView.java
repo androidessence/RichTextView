@@ -85,11 +85,8 @@ public class RichTextView extends TextView {
     private void initStyle(AttributeSet attrs, int defStyleAttr) {
         TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.RichTextView, defStyleAttr, 0);
 
-        if (typedArray != null) {
-            //TODO: Implement special attributes.
-
-            typedArray.recycle();
-        }
+        //TODO: Implement special attributes.
+        if (typedArray != null) typedArray.recycle();
     }
 
     //-- Overridden methods --//
