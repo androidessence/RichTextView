@@ -2,18 +2,11 @@ package com.androidessence.richtextview;
 
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.SpannableString;
-import android.text.style.StyleSpan;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 
 //import com.androidessence.lib.CustomSpannableStringBuilder;
 import com.androidessence.lib.RichTextView;
-
-import java.util.EnumSet;
 
 public class MainActivity extends AppCompatActivity {
     private static final String SAMPLE_STRING =
@@ -26,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
                     "This text is blue.\n" + // Blue = 156 - 161
                     "This highlight is red.\n" + // Red = 180 - 184
                     "This line has a Image.\n" + // 207
-                    "This text fades in"; //209
+                    "This line has a hyperlink."; // Hyperlink = 223 - 233
 
 
     @Override
@@ -53,8 +46,6 @@ public class MainActivity extends AppCompatActivity {
         richTextView.colorSpan(180, 184, RichTextView.ColorFormatType.HIGHLIGHT, Color.RED);
         richTextView.formatImageSpan(206,207, BitmapFactory.decodeResource(getResources(),
                 R.mipmap.ic_launcher));
-        richTextView.formatFadeInSpan(208,richTextView.length(),500);
-
-
+        richTextView.addHyperlinkToSpan(224, 234, "http://google.com");
     }
 }

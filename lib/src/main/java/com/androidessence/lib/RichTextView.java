@@ -4,22 +4,41 @@ import android.animation.IntEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.SpannableString;
 import android.text.style.BackgroundColorSpan;
+import android.net.Uri;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.style.BackgroundColorSpan;
+import android.text.style.BulletSpan;
+import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
 import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
 import android.text.style.SubscriptSpan;
 import android.text.style.SuperscriptSpan;
+import android.text.style.URLSpan;
 import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
 import android.util.Property;
 
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
+import java.util.Calendar;
 import java.util.EnumSet;
 
 
@@ -72,11 +91,8 @@ public class RichTextView extends AppCompatTextView {
     private void initStyle(AttributeSet attrs, int defStyleAttr) {
         TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.RichTextView, defStyleAttr, 0);
 
-        if (typedArray != null) {
-            //TODO: Implement special attributes.
-
-            typedArray.recycle();
-        }
+        //TODO: Implement special attributes.
+        if (typedArray != null) typedArray.recycle();
     }
 
     //-- Overridden methods --//
@@ -282,6 +298,33 @@ public class RichTextView extends AppCompatTextView {
     }
 
     /**
+     * Adds a hyperlink to a portion of the string.
+     *
+     * @param start      The index of the first character of the link.
+     * @param end        The index of the last character  of the link.
+     * @param url        The URL that the hyperlink points to.
+     */
+    public void addHyperlinkToSpan(int start, int end, final String url) {
+        // If the start index is less than 0 or greater than/equal to the length of the string, it is invalid.
+        // If the end index is less than start or greater than the string length, it is invalid.
+        if (start < 0 || start >= mSpannableString.length()) {
+            throw new IllegalArgumentException("Invalid start index.");
+        } else if (end < start || end > mSpannableString.length()) {
+            throw new IllegalArgumentException("Invalid end index.");
+        }
+
+        // Add span
+        mSpanCount++;
+        this.setMovementMethod(LinkMovementMethod.getInstance());
+
+        URLSpan urlSpan = new URLSpan(url);
+        mSpannableString.setSpan(urlSpan, start, end, 0);
+
+        // Set text
+        setText(mSpannableString);
+    }
+
+    /**
      * Clears all spans applied to our SpannableString.
      */
     public void clearSpans() {
@@ -419,6 +462,4 @@ public class RichTextView extends AppCompatTextView {
             return object.getAlpha();
         }
     };
-
-
 }

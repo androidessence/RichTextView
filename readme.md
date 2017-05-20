@@ -12,7 +12,7 @@ Usage
 To have access to the library, add the following dependency to your build.gradle:
 
 ```java
-	compile 'com.androidessence.lib:richtextview:1.0.2'
+	compile 'com.androidessence.lib:richtextview:1.0.4'
 ```
 
 Format Types
@@ -55,6 +55,14 @@ To use these formats, use the following method:
 - `colorSpan(int start, int end, FormatType formatType, int color)`
 	- This method functions just as the ones above it, the only difference is that it also requires a color to apply to the span. For example, if you wanted to make the first four characters of text blue, you would use `colorSpan(0, 5, FormatType.FOREGROUND, Color.BLUE);`
 
+Hyperlinks
+----------
+
+You can add a hyperlink to a section of the text using the following method :
+
+- `addHyperlinkToSpan(int start, int end, final String url)`
+	- This method adds a hyperlink to the text from indices start to end. Clicking on the text will open the browser and load it with the url parameter.`
+
 Sample
 -----
 
@@ -69,6 +77,7 @@ This library was created by [Adam McNeilly](http://adammcneilly.com) with specia
  - [Maurício Pessoa](https://github.com/Mauker1)
  - [Trevor Elkins](http://trevore.com)
  - [Raghunandan Kavi](https://github.com/raghunandankavi2010)
+ - [R.Harikrishnan](https://github.com/rhari991)
 
 It is also released under [Android Essence blog](http://androidessence.com/).
 
