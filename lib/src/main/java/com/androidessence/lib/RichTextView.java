@@ -1,10 +1,16 @@
 package com.androidessence.lib;
 
+import android.animation.IntEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.support.v7.widget.AppCompatTextView;
+import android.text.SpannableString;
+import android.text.style.BackgroundColorSpan;
 import android.net.Uri;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -23,6 +29,8 @@ import android.text.style.SuperscriptSpan;
 import android.text.style.URLSpan;
 import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
+import android.util.Property;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -32,8 +40,6 @@ import org.w3c.dom.Text;
 
 import java.util.Calendar;
 import java.util.EnumSet;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 /**
@@ -41,7 +47,7 @@ import java.util.regex.Pattern;
  * <p>
  * Created by adammcneilly on 4/1/16.
  */
-public class RichTextView extends TextView {
+public class RichTextView extends AppCompatTextView {
     //-- Properties --//
 
     /**
@@ -98,21 +104,87 @@ public class RichTextView extends TextView {
         super.setText(mSpannableString, type);
     }
 
+    /**
+     * Add a bullet at the start fo each line. You can specify start and endline
+     *
+     * @param start      The index at which the text starts to fade.
+     * @param end        The index at which the text fade ends.
+     * @param duration   The duration for the text fade.
+     *
+     */
+    public void formatFadeInSpan(int start, int end,int duration)
+    {
+
+        mSpanCount++;
+        final FadeInSpan span = new FadeInSpan();
+
+        mSpannableString.setSpan(span, start, end, 0);
+
+        ObjectAnimator objectAnimator = ObjectAnimator.ofInt(
+                span, FADE_INT_PROPERTY, 0, 255);
+        objectAnimator.setEvaluator(new IntEvaluator());
+        objectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                setText(mSpannableString);
+            }
+        });
+        objectAnimator.setDuration(duration);
+        objectAnimator.start();
+    }
+
+    /**
+     * Add a bullet at the start fo each line. You can specify start and endline
+     *
+     * @param startline      The start line at which bullet is shown.
+     * @param endline        The end line at which bullet is shown.
+     */
+    public void formatBulletSpan(int startline,int endline) {
+
+        mSpanCount++;
+        String[] splitter = mSpannableString.toString().split("\n");
+
+        int start = 0;
+
+        for (int i = 0; i < splitter.length; i++) {
+            //Log.d("Index : " + i, splitter[i]);
+            if (!splitter[i].equals("") && !splitter[i].equals("\n")) {
+
+                if(i>=(startline-1) && i<endline) {
+
+                    mSpannableString.setSpan(new com.androidessence.lib.BulletSpan(100,false),start,(start+1),0);
+                    start = start + splitter[i].length() + 1;
+                }else
+                {
+                    start = start + splitter[i].length() + 1;
+                }
+
+            }
+        }
+
+        setText(mSpannableString);
+
+    }
+
+    /**
+     * Add a bullet at the start fo each line. You can specify start and endline
+     *
+     * @param startline      The start line at which number is shown.
+     * @param endline        The end line at which number is shown.
+     */
     public void formatNumberSpan(int startline,int endline) {
 
-
+        mSpanCount++;
         String[] splitter = mSpannableString.toString().split("\n");
 
         int start = 0;
         int index = 1;
 
         for (int i = 0; i < splitter.length; i++) {
-            Log.d("Index : " + i, splitter[i]);
+            //Log.d("Index : " + i, splitter[i]);
             if (!splitter[i].equals("") && !splitter[i].equals("\n")) {
 
-                /* index starts at 0.*/
                 if(i>=(startline-1) && i<endline) {
-                    mSpanCount++;
                     mSpannableString.setSpan(new NumberSpan(index++, 100, false, getTextSize()), start, (start + 1), 0);
                     start = start + splitter[i].length() + 1;
                 }else
@@ -127,6 +199,12 @@ public class RichTextView extends TextView {
 
     }
 
+    /**
+     * Add a Image at the specified index
+     *
+     * @param start    The start index where image is shown.
+     * @param end      The end index where image is shown.
+     */
     public void formatImageSpan(int start, int end, Bitmap drawable) {
         // If the start index is less than 0 or greater than/equal to the length of the string, it is invalid.
         // If the end index is less than start or greater than the string length, it is invalid.
@@ -251,7 +329,7 @@ public class RichTextView extends TextView {
      */
     public void clearSpans() {
         // Get spans
-        Object[] spans = mSpannableString.getSpans(0, mSpannableString.length(), Object.class);
+        Object[] spans = mSpannableString.getSpans(0, mSpanCount, Object.class);
 
         // Loop through and remove each one.
         for (Object span : spans) {
@@ -262,8 +340,6 @@ public class RichTextView extends TextView {
         // Set text again.
         setText(mSpannableString);
     }
-
-
 
     //-- Accessors --//
 
@@ -373,4 +449,17 @@ public class RichTextView extends TextView {
         public abstract Object getSpan(int color);
     }
 
+    /* Fade In */
+    private static final Property<FadeInSpan, Integer> FADE_INT_PROPERTY
+            = new Property<FadeInSpan, Integer>(Integer.class, "FADE_INT_PROPERTY") {
+
+        @Override
+        public void set(FadeInSpan span, Integer value) {
+            span.setAlpha(value);
+        }
+        @Override
+        public Integer get(FadeInSpan object) {
+            return object.getAlpha();
+        }
+    };
 }
