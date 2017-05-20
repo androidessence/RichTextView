@@ -18,6 +18,17 @@ allprojects {
     repositories {
         jcenter()
     }
+
+    ext {
+        androidCompileSdkVersion = 25
+        androidBuildToolsVersion = "25.0.3"
+        androidMinSdkVersion = 15
+        androidTargetSdkVersion = 25
+
+        supportLibraryVersion = "25.3.1"
+        libraryVersionCode = 5
+        libraryVersionName = "1.0.4"
+    }
 }
 
 task clean(type: Delete) {
