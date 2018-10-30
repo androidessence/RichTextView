@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         richTextView.formatSpan(53, 64, RichTextView.FormatType.UNDERLINE)
         richTextView.formatSpan(78, 92, RichTextView.FormatType.STRIKETHROUGH)
         richTextView.formatNumberSpan(1, 5)
-        richTextView.formatBulletSpan(1, 5)
+        richTextView.formatBulletSpan(1, 5, 40, Color.GREEN)
         richTextView.formatSpan(106, 118, RichTextView.FormatType.SUPERSCRIPT)
         richTextView.formatSpan(132, 142, RichTextView.FormatType.SUBSCRIPT)
         richTextView.colorSpan(156, 161, RichTextView.ColorFormatType.FOREGROUND, Color.BLUE)

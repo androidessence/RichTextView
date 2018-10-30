@@ -23,11 +23,11 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile "com.android.support:appcompat-v7:${supportLibraryVersion}"
-    compile project(':lib')
-    compile "com.android.support:support-annotations:${supportLibraryVersion}"
-    compile "com.android.support:appcompat-v7:${supportLibraryVersion}"
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    implementation "com.android.support:appcompat-v7:${supportLibraryVersion}"
+    implementation project(':lib')
+    implementation "com.android.support:support-annotations:${supportLibraryVersion}"
+    implementation "com.android.support:appcompat-v7:${supportLibraryVersion}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }

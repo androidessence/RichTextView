@@ -80,7 +80,7 @@ class RichTextView @JvmOverloads constructor(private val mContext: Context, attr
      * @param startline      The start line at which bullet is shown.
      * @param endline        The end line at which bullet is shown.
      */
-    fun formatBulletSpan(startline: Int, endline: Int) {
+    fun formatBulletSpan(startline: Int, endline: Int, gapWidth: Int, color: Int) {
 
         spanCount++
         val splitter = mSpannableString!!.toString().split("\n".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
@@ -95,7 +95,7 @@ class RichTextView @JvmOverloads constructor(private val mContext: Context, attr
                 .forEach {
                     if (it >= startline - 1 && it < endline) {
 
-                        mSpannableString?.setSpan(com.androidessence.lib.BulletSpan(100, false), start, start + 1, 0)
+                        mSpannableString?.setSpan(BulletSpan(40, color, 20), start, start + 1, 0)
                         start += splitter[it].length + 1
                     } else {
                         start += splitter[it].length + 1
