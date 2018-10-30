@@ -35,7 +35,7 @@ To use these, use one of the following formatSpan methods:
 	- This method has the same function as the one above, but allows you to apply a number of FormatTypes to this span of text.
 - `formatNumberSpan(int startline, int endline)`
 	- This method is used to apply NumberSpan based on the start and end line specified.
-- `formatBulletSpan(int startline, int endline)`
+- `formatBulletSpan(int startline, int endline, int gapWidth, int color)`
 	- This method is used to apply Bullets based on start and end lines.
 - `formatImageSpan(int start, int end, Bitmap bitmap)`
 	- This method is used to apply ImageSpan based on the start and end line specified along with a bitmap specified.
