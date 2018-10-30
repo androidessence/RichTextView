@@ -41,6 +41,8 @@ To use these, use one of the following formatSpan methods:
 	- This method is used to apply ImageSpan based on the start and end line specified along with a bitmap specified.
 - `formatFadeInSpan(int startIndex, int endIndex)`
 	- This method fades in text that starts with startIndex and ends with endIndex.
+- `formatScaleXSpan(float proportion, int start, int end, Bitmap bitmap)`
+	- This method is used to apply ScaleXSpan to the text so that it scales proportionately.
 
 
 Color Format Types

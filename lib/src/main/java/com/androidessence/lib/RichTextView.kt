@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.graphics.Typeface
 import android.support.v7.widget.AppCompatTextView
 import android.text.SpannableString
+import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import android.text.style.*
 import android.util.AttributeSet
@@ -198,6 +199,32 @@ class RichTextView @JvmOverloads constructor(private val mContext: Context, attr
 
         // Create span to be applied - Default to normal.
         formatTypes.forEach { mSpannableString?.setSpan(it.span, start, end, 0) }
+
+        text = mSpannableString
+    }
+
+    /**
+     * Formats a text that is scaled.
+     *
+     * @param proportion   proportion to which the text scales.
+     * Values > 1.0 will stretch the text wider. Values < 1.0 will stretch the text narrower.
+     * @param start  The index of the first character to span.
+     * @param end    The index of the last character to span.
+     */
+    fun formatScaleXSpan(proportion: Float, start: Int, end: Int) {
+
+        // If the start index is less than 0 or greater than/equal to the length of the string, it is invalid.
+        // If the end index is less than start or greater than the string length, it is invalid.
+        if (start < 0 || start >= (mSpannableString?.length ?: 0)) {
+            throw IllegalArgumentException("Invalid start index.")
+        } else if (end < start || end > (mSpannableString?.length ?: 0)) {
+            throw IllegalArgumentException("Invalid end index.")
+        }
+
+        // Add span
+        spanCount++
+
+        mSpannableString!!.setSpan(ScaleXSpan(proportion), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
         text = mSpannableString
     }
