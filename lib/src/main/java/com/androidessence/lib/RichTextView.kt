@@ -79,6 +79,8 @@ class RichTextView @JvmOverloads constructor(private val mContext: Context, attr
      *
      * @param startline      The start line at which bullet is shown.
      * @param endline        The end line at which bullet is shown.
+     * @param gapWidth       The gap width in pixel (px).
+     * @param endline        The color of the bullet.
      */
     fun formatBulletSpan(startline: Int, endline: Int, gapWidth: Int, color: Int) {
 
@@ -95,7 +97,7 @@ class RichTextView @JvmOverloads constructor(private val mContext: Context, attr
                 .forEach {
                     if (it >= startline - 1 && it < endline) {
 
-                        mSpannableString?.setSpan(BulletSpan(40, color, 20), start, start + 1, 0)
+                        mSpannableString?.setSpan(BulletSpan(gapWidth, color, 20), start, start + 1, 0)
                         start += splitter[it].length + 1
                     } else {
                         start += splitter[it].length + 1
