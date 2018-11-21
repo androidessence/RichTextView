@@ -70,7 +70,8 @@ Sample
 
 Below is a sample of all the possible formats you can apply to a RichTextView. In this example it is all one string, formatted eight different ways.
 
-<img src='https://github.com/raghunandankavi2010/RichTextView/blob/master/sample.png' width='400' height='640' />
+
+<img src='https://github.com/raghunandankavi2010/RichTextView/blob/ScaledX-Span/sample.png' width='400' height='640' />
 
 Credits & Contact
 -----------------
