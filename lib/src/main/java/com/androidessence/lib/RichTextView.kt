@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Typeface
+import android.os.Build
 import android.support.v7.widget.AppCompatTextView
 import android.text.SpannableString
 import android.text.Spanned
@@ -96,12 +97,16 @@ class RichTextView @JvmOverloads constructor(private val mContext: Context, attr
                     splitter[it] != "" && splitter[it] != "\n"
                 }
                 .forEach {
-                    if (it >= startline - 1 && it < endline) {
+                    start += if (it >= startline - 1 && it < endline) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                            mSpannableString?.setSpan(BulletSpan(gapWidth, color, 20), start, start + 1, 0)
+                        } else {
+                        mSpannableString?.setSpan(CustomBulletSpan(gapWidth, false, color, 20), start, start + 1, 0)
+                        }
 
-                        mSpannableString?.setSpan(BulletSpan(gapWidth, color, 20), start, start + 1, 0)
-                        start += splitter[it].length + 1
+                        splitter[it].length + 1
                     } else {
-                        start += splitter[it].length + 1
+                        splitter[it].length + 1
                     }
                 }
 

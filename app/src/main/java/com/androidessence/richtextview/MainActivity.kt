@@ -34,12 +34,12 @@ class MainActivity : AppCompatActivity() {
         richTextView.formatImageSpan(206, 207, BitmapFactory.decodeResource(resources,
                 R.mipmap.ic_launcher))
         richTextView.addHyperlinkToSpan(224, 233, "http://google.com")
-        richTextView.formatScaleXSpan(2f,247, 253)
+        richTextView.formatScaleXSpan(2f,248, 254)
     }
 
     companion object {
         private val SAMPLE_STRING =
-                "This text is bold\n" + // Bold = 13 - 18
+                "This text is bold.\n" + // Bold = 13 - 18
                         "This text is italic.\n" + // Italic = 32 - 39
                         "This text is underlined.\n" + // Underlined = 53 - 64
                         "This text is strikethrough.\n" + // strikethrough = 78 - 92
@@ -49,6 +49,6 @@ class MainActivity : AppCompatActivity() {
                         "This highlight is red.\n" + // Red = 180 - 184
                         "This line has a Image.\n" + // 207
                         "This line has a hyperlink.\n" +// Hyperlink = 223 - 233
-                        "This text is scaled." // scaled = 247 - 253
+                        "This text is scaled." // scaled = 248 - 258
     }
 }
