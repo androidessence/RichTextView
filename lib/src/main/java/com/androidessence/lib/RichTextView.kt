@@ -6,7 +6,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Typeface
 import android.os.Build
-import android.support.v7.widget.AppCompatTextView
+import androidx.appcompat.widget.AppCompatTextView
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.method.LinkMovementMethod

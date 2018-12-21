@@ -3,7 +3,7 @@ package com.androidessence.richtextview
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 
 //import com.androidessence.lib.CustomSpannableStringBuilder;
 import com.androidessence.lib.RichTextView
