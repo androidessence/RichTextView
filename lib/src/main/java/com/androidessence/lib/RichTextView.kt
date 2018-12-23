@@ -5,8 +5,10 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Typeface
-import android.support.v7.widget.AppCompatTextView
+import android.os.Build
+import androidx.appcompat.widget.AppCompatTextView
 import android.text.SpannableString
+import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import android.text.style.*
 import android.util.AttributeSet
@@ -79,8 +81,10 @@ class RichTextView @JvmOverloads constructor(private val mContext: Context, attr
      *
      * @param startline      The start line at which bullet is shown.
      * @param endline        The end line at which bullet is shown.
+     * @param gapWidth       The gap width in pixel (px).
+     * @param endline        The color of the bullet.
      */
-    fun formatBulletSpan(startline: Int, endline: Int) {
+    fun formatBulletSpan(startline: Int, endline: Int, gapWidth: Int, color: Int) {
 
         spanCount++
         val splitter = mSpannableString!!.toString().split("\n".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
@@ -93,12 +97,16 @@ class RichTextView @JvmOverloads constructor(private val mContext: Context, attr
                     splitter[it] != "" && splitter[it] != "\n"
                 }
                 .forEach {
-                    if (it >= startline - 1 && it < endline) {
+                    start += if (it >= startline - 1 && it < endline) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                            mSpannableString?.setSpan(BulletSpan(gapWidth, color, 20), start, start + 1, 0)
+                        } else {
+                        mSpannableString?.setSpan(CustomBulletSpan(gapWidth, false, color, 20), start, start + 1, 0)
+                        }
 
-                        mSpannableString?.setSpan(com.androidessence.lib.BulletSpan(100, false), start, start + 1, 0)
-                        start += splitter[it].length + 1
+                        splitter[it].length + 1
                     } else {
-                        start += splitter[it].length + 1
+                        splitter[it].length + 1
                     }
                 }
 
@@ -196,6 +204,32 @@ class RichTextView @JvmOverloads constructor(private val mContext: Context, attr
 
         // Create span to be applied - Default to normal.
         formatTypes.forEach { mSpannableString?.setSpan(it.span, start, end, 0) }
+
+        text = mSpannableString
+    }
+
+    /**
+     * Formats a text that is scaled.
+     *
+     * @param proportion   proportion to which the text scales.
+     * Values > 1.0 will stretch the text wider. Values < 1.0 will stretch the text narrower.
+     * @param start  The index of the first character to span.
+     * @param end    The index of the last character to span.
+     */
+    fun formatScaleXSpan(proportion: Float, start: Int, end: Int) {
+
+        // If the start index is less than 0 or greater than/equal to the length of the string, it is invalid.
+        // If the end index is less than start or greater than the string length, it is invalid.
+        if (start < 0 || start >= (mSpannableString?.length ?: 0)) {
+            throw IllegalArgumentException("Invalid start index.")
+        } else if (end < start || end > (mSpannableString?.length ?: 0)) {
+            throw IllegalArgumentException("Invalid end index.")
+        }
+
+        // Add span
+        spanCount++
+
+        mSpannableString!!.setSpan(ScaleXSpan(proportion), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
         text = mSpannableString
     }

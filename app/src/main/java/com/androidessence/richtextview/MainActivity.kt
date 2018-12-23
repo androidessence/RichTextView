@@ -3,7 +3,7 @@ package com.androidessence.richtextview
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 
 //import com.androidessence.lib.CustomSpannableStringBuilder;
 import com.androidessence.lib.RichTextView
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         richTextView.formatSpan(53, 64, RichTextView.FormatType.UNDERLINE)
         richTextView.formatSpan(78, 92, RichTextView.FormatType.STRIKETHROUGH)
         richTextView.formatNumberSpan(1, 5)
-        richTextView.formatBulletSpan(1, 5)
+        richTextView.formatBulletSpan(1, 5, 40, Color.GREEN)
         richTextView.formatSpan(106, 118, RichTextView.FormatType.SUPERSCRIPT)
         richTextView.formatSpan(132, 142, RichTextView.FormatType.SUBSCRIPT)
         richTextView.colorSpan(156, 161, RichTextView.ColorFormatType.FOREGROUND, Color.BLUE)
@@ -33,7 +33,8 @@ class MainActivity : AppCompatActivity() {
         richTextView.colorSpan(180, 184, RichTextView.ColorFormatType.HIGHLIGHT, Color.RED)
         richTextView.formatImageSpan(206, 207, BitmapFactory.decodeResource(resources,
                 R.mipmap.ic_launcher))
-        richTextView.addHyperlinkToSpan(224, 234, "http://google.com")
+        richTextView.addHyperlinkToSpan(224, 233, "http://google.com")
+        richTextView.formatScaleXSpan(2f,248, 254)
     }
 
     companion object {
@@ -47,6 +48,7 @@ class MainActivity : AppCompatActivity() {
                         "This text is blue.\n" + // Blue = 156 - 161
                         "This highlight is red.\n" + // Red = 180 - 184
                         "This line has a Image.\n" + // 207
-                        "This line has a hyperlink." // Hyperlink = 223 - 233
+                        "This line has a hyperlink.\n" +// Hyperlink = 223 - 233
+                        "This text is scaled." // scaled = 248 - 258
     }
 }

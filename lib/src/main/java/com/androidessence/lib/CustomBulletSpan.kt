@@ -7,11 +7,11 @@ import android.text.Spanned
 import android.text.style.LeadingMarginSpan
 
 /**
- * Allows a number of rows in a TextView to have bullets infront of them.
+ * Allows a number of rows in a TextView to have bullets in front of them.
  *
  * Created by Raghunandan on 28-11-2016.
  */
-class BulletSpan(private val mGapWidth: Int, private val mIgnoreSpan: Boolean) : LeadingMarginSpan {
+class CustomBulletSpan(private val mGapWidth: Int, private val mIgnoreSpan: Boolean, private val bulletColor: Int, private val bulletRadius: Int) : LeadingMarginSpan {
 
     override fun getLeadingMargin(first: Boolean): Int {
         return mGapWidth//mIgnoreSpan ? 0 : Math.max(Math.round(mWidth + 2), mGapWidth);
@@ -24,10 +24,17 @@ class BulletSpan(private val mGapWidth: Int, private val mIgnoreSpan: Boolean) :
 
         if (!mIgnoreSpan && spanned.getSpanStart(this) == start) {
             // set paint
+            val oldStyle = p.style
+            val oldcolor = p.color
             p.style = Paint.Style.FILL
+            p.color = bulletColor
 
             c.drawCircle((x + dir * 10).toFloat(), (top + bottom) / 2.0f,
-                    10f, p)
+                    bulletRadius.toFloat(), p)
+
+            // this is required if not the color and style is carried to other spans.
+            p.color = oldcolor
+            p.style = oldStyle
         }
     }
 }

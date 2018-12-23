@@ -35,12 +35,14 @@ To use these, use one of the following formatSpan methods:
 	- This method has the same function as the one above, but allows you to apply a number of FormatTypes to this span of text.
 - `formatNumberSpan(int startline, int endline)`
 	- This method is used to apply NumberSpan based on the start and end line specified.
-- `formatBulletSpan(int startline, int endline)`
+- `formatBulletSpan(int startline, int endline, int gapWidth, int color)`
 	- This method is used to apply Bullets based on start and end lines.
 - `formatImageSpan(int start, int end, Bitmap bitmap)`
 	- This method is used to apply ImageSpan based on the start and end line specified along with a bitmap specified.
 - `formatFadeInSpan(int startIndex, int endIndex)`
 	- This method fades in text that starts with startIndex and ends with endIndex.
+- `formatScaleXSpan(float proportion, int start, int end, Bitmap bitmap)`
+	- This method is used to apply ScaleXSpan to the text so that it scales proportionately.
 
 
 Color Format Types
@@ -68,7 +70,8 @@ Sample
 
 Below is a sample of all the possible formats you can apply to a RichTextView. In this example it is all one string, formatted eight different ways.
 
-<img src='https://github.com/raghunandankavi2010/RichTextView/blob/master/Screen%20shot.png' width='400' height='640' />
+
+<img src='https://github.com/raghunandankavi2010/RichTextView/blob/ScaledX-Span/sample.png' width='400' height='640' />
 
 Credits & Contact
 -----------------
