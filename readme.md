@@ -12,7 +12,7 @@ Usage
 To have access to the library, add the following dependency to your build.gradle:
 
 ```java
-	compile 'com.androidessence.lib:richtextview:1.0.4'
+implementation 'com.androidessence.lib:richtextview:1.0.4'
 ```
 
 Format Types
